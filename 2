@@ -1,0 +1,19 @@
+rows = []
+
+
+while True:
+    filename = input('Введите название файла')
+    if filename == 'STOP':
+        break
+    while True:
+        row = input('Введите строку')
+        if row:
+            rows.append(row)
+        else:
+            with open(filename, 'a+') as file:
+                for row in rows:
+                    file.write(row + '\n')
+                rows = []
+            break
+            
+            
