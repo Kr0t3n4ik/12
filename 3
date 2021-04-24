@@ -1,0 +1,28 @@
+import csv
+
+ratings = []
+
+
+def write_avg_rating(student_name, avg_rating):
+    with open('avg_student_ratings.csv', 'a') as file:
+        file.write(', '.join([student_name, str(float(avg_rating))]) + '\n')
+
+
+def main():
+    filename = 'students.csv'
+    with open(filename) as file:
+        reader = csv.reader(file, delimiter=',')
+        for row in reader:
+            student_name, rating = row[0], list(map(int, row[1:]))
+            ratings.extend(rating)
+            avg_rating = sum(rating) / len(rating)
+            if avg_rating < 10:
+                print(student_name)
+            write_avg_rating(student_name, avg_rating)
+        print('Grade point average - ' + str(sum(ratings) / len(ratings)))
+
+
+if name == '__main__':
+    main()
+    
+    
